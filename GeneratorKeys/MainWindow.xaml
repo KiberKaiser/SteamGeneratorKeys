@@ -1,0 +1,117 @@
+﻿<Window x:Class="GeneratorKeys.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GeneratorKeys"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="385" Width="311" Background="#151515" ResizeMode="NoResize" WindowStyle="None" MouseDown="Form_MouseDown">
+
+    <Window.Resources>
+        <Style x:Key="HoverButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#FF1B1B1B"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FF272727"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="White" Duration="0:0:0.3"/>
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="Black" Duration="0:0:0.3"/>
+                                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="Black" Duration="0:0:0.3"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#FF1B1B1B" Duration="0:0:0.3"/>
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="#FF272727" Duration="0:0:0.3"/>
+                                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="White" Duration="0:0:0.3"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="NoHighlightTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="#FF1B1B1B"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="0,-4,0,0" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="733"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="button_SaveFile" Content="Save as file" HorizontalAlignment="Left" Margin="103,265,0,0" VerticalAlignment="Top" Height="41" Width="104" Style="{StaticResource HoverButtonStyle}" FontFamily="Bahnschrift" FontSize="17" Click="button_SaveFile_Click" RenderTransformOrigin="0.418,0.475"/>
+        <Button x:Name="button_Clear" Content="Clear list" HorizontalAlignment="Left" Margin="210,265,0,0" VerticalAlignment="Top" Height="41" Width="89" Style="{StaticResource HoverButtonStyle}" FontFamily="Bahnschrift" FontSize="17" Click="button_Clear_Click" RenderTransformOrigin="0.454,0.475"/>
+        <Button x:Name="button_Generate" Content="Generate" HorizontalAlignment="Left" Margin="18,265,0,0" VerticalAlignment="Top" Height="41" Width="82" Style="{StaticResource HoverButtonStyle}" FontFamily="Bahnschrift" FontSize="17" Click="button_Generate_Click"/>
+        <TextBox x:Name="NumericTextBox" Text="0" Height="32" VerticalAlignment="Top" Margin="210,308,434,0" FontFamily="Rubik" FontSize="14" BorderBrush="#FF272727" Foreground="White" Background="#FF1B1B1B" Padding="0,7,0,0" UseLayoutRounding="True" ScrollViewer.CanContentScroll="True" BorderThickness="0,0,0,0"/>
+        <Button x:Name="IncreaseButton" Content="▲" FontSize="5" VerticalAlignment="Top" Height="15" Click="IncreaseButton_Click" Margin="280,308,433,0" Style="{StaticResource HoverButtonStyle}" Padding="0,0,0,0"/>
+        <Button x:Name="DecreaseButton" Content="▼" FontSize="5" VerticalAlignment="Top" Height="15" Click="DecreaseButton_Click" Margin="280,325,433,0" Style="{StaticResource HoverButtonStyle}" Padding="0,0,0,0"/>
+        <CheckBox x:Name="checkBox_FirstType" Content="Type 1" HorizontalAlignment="Left" Margin="18,342,0,0" VerticalAlignment="Top"  Checked="checkBox_FirstType_Checked" FontFamily="Bahnschrift" Foreground="White" FontSize="20" BorderBrush="{x:Null}" Width="120" Height="22" RenderTransformOrigin="4.21,0.757">
+            <CheckBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform X="-0.048" Y="3.151"/>
+                </TransformGroup>
+            </CheckBox.RenderTransform>
+        </CheckBox>
+        <CheckBox x:Name="checkBox_SecondType" Content="Type 2" HorizontalAlignment="Left" Margin="105,345,0,0" VerticalAlignment="Top"  Checked="checkBox_SecondType_Checked" FontFamily="Bahnschrift" Foreground="White" FontSize="20" BorderBrush="{x:Null}" Width="120" Height="21" RenderTransformOrigin="0.5,0.5">
+            <CheckBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </CheckBox.RenderTransform>
+        </CheckBox>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="18,41,0,0" TextWrapping="Wrap"  Text="" VerticalAlignment="Top" Width="282" Height="219" Background="#FF1B1B1B" BorderBrush="Transparent" Foreground="White" Style="{StaticResource NoHighlightTextBoxStyle}" SelectionBrush="{x:Null}" AutomationProperties.IsOffscreenBehavior="Offscreen"/>
+        <Rectangle HorizontalAlignment="Left" Height="32" Margin="18,308,0,0" VerticalAlignment="Top" Width="189" Fill="#FF1B1B1B"/>
+        <Label x:Name="label1" Content="Generation delay " HorizontalAlignment="Left" Margin="18,304,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" FontFamily="Bahnschrift" FontSize="24"/>
+        <Button x:Name="CloseButton" Content="X" HorizontalAlignment="Left" Margin="280,4,0,0" VerticalAlignment="Top" Height="24" Width="31" Style="{StaticResource HoverButtonStyle}" FontFamily="Bahnschrift" FontSize="18" Click="СloseButton_Click" RenderTransformOrigin="0.454,0.475" Padding="1,1,1,1" UseLayoutRounding="True"/>
+        <Button x:Name="MinimizeButton" Content="-" HorizontalAlignment="Left" Margin="250,4,0,0" VerticalAlignment="Top" Height="24" Width="30" Style="{StaticResource HoverButtonStyle}" FontFamily="Bahnschrift" FontSize="18" Click="СloseButton_Click" RenderTransformOrigin="0.454,0.475" Padding="1,1,1,1"/>
+        <Rectangle HorizontalAlignment="Left" Height="2" Margin="280,323,0,0" VerticalAlignment="Top" Width="20" Fill="#FF272727" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="-1" ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+
+    </Grid>
+</Window>
